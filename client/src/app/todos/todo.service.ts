@@ -6,31 +6,33 @@ import { Todo } from './todo';
 
 
 
-@Injectable()
+@Injectable({
+  providedIn: 'root',
+})
 export class TodoService {
-  readonly todoUrl: string = environment.apiUrl + 'todo';
+  readonly todoUrl: string = environment.apiUrl + 'todos';
+
   constructor(private httpClient: HttpClient) {
 
   }
 
-  getTodos(filters?: {body?: string; owner?: string}): Observable<Todo[]> {
+  getTodos(filters?: { body?: string; owner?: string;  }): Observable<Todo[]> {
     let httpParams: HttpParams = new HttpParams();
-    if (filters){
-      if(filters.body){
+    if (filters) {
+      if (filters.body) {
         httpParams = httpParams.set('body', filters.body);
       }
-      if(filters.owner){
+      if (filters.owner) {
         httpParams = httpParams.set('owner', filters.owner);
       }
     }
-
-
     return this.httpClient.get<Todo[]>(this.todoUrl, {
       params: httpParams,
     });
   }
 
   filterTodos(todos: Todo[], filters: { status?: boolean; category?:string }): Todo[] {
+
     let filteredTodos = todos;
 
     //filter by owner
@@ -39,6 +41,9 @@ export class TodoService {
 
       filteredTodos = filteredTodos.filter(todo => todo.category.toLowerCase().indexOf(filters.category) !== -1);
     }
+    // if (filters.status) {
+
+    // }
 
     return filteredTodos;
   }
