@@ -1,3 +1,4 @@
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
@@ -15,10 +16,10 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterTestingModule } from '@angular/router/testing';
 import { Observable } from 'rxjs';
-import { MockUserService } from '../../testing/user.service.mock';
-import { Todo } from './todo';
+import { MockTodoService } from './todo.service.mock';
 import { TodoListComponent } from './todo-list.component';
 import { TodoService } from './todo.service';
+import { Todo } from './todo';
 
 const COMMON_IMPORTS: any[] = [
   FormsModule,
@@ -36,47 +37,33 @@ const COMMON_IMPORTS: any[] = [
   MatSnackBarModule,
   BrowserAnimationsModule,
   RouterTestingModule,
+  HttpClientTestingModule
 ];
 
-
-
-
 describe('TodoListComponent', () => {
+
   let todoList: TodoListComponent;
   let fixture: ComponentFixture<TodoListComponent>;
 
-  // beforeEach(async () => {
-  //   await TestBed.configureTestingModule({
-  //     declarations: [ TodoListComponent ]
-  //   })
-  //   .compileComponents();
-  // });
-
-  // beforeEach(() => {
-  //   fixture = TestBed.createComponent(TodoListComponent);
-  //   component = fixture.componentInstance;
-  //   fixture.detectChanges();
-  // });
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [COMMON_IMPORTS],
+      imports: [COMMON_IMPORTS, HttpClientTestingModule],
       declarations: [TodoListComponent],
-      // providers:    [ UserService ]  // NO! Don't provide the real service!
-      // Provide a test-double instead
-      // This MockerUserService is defined in client/testing/user.service.mock.
-      providers: [{ provide: TodoService, useValue: new MockUserService() }]
+
+      providers: [{ provide: TodoService, useValue: new MockTodoService() }]
     });
   });
+
   beforeEach(waitForAsync(() => {
     TestBed.compileComponents().then(() => {
-      // Create a "fixture" of the UserListComponent. that
-      // allows us to get an instance of the component
-      // (userList, below) that we can "control" in
-      // the tests.
+
       fixture = TestBed.createComponent(TodoListComponent);
       todoList = fixture.componentInstance;
       fixture.detectChanges();
     });
   }));
 
+
 });
+
+
