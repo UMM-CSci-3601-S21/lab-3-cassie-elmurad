@@ -7,28 +7,28 @@ import { TodoService } from './todo.service';
 describe('TodoService', () => {
   const testTodos: Todo[] = [
     {
-      "owner": "Blanche",
-      "status": false,
-      "body": "In sunt ex non tempor cillum commodo amet incididunt anim qui commodo quis. Cillum non labore ex sint esse.",
-      "category": "software design"
+      owner: 'Blanche',
+      status: false,
+      body: 'In sunt ex non tempor cillum commodo amet incididunt anim qui commodo quis. Cillum non labore ex sint esse.',
+      category: 'software design'
     },
     {
-      "owner": "Fry",
-      "status": false,
-      "body": "Ipsum esse est ullamco magna tempor anim laborum non officia deserunt veniam commodo. Aute minim incididunt ex commodo.",
-      "category": "video games"
+      owner: 'Fry',
+      status: false,
+      body: 'Ipsum esse est ullamco magna tempor anim laborum non officia deserunt veniam commodo. Aute minim incididunt ex commodo.',
+      category: 'video games'
     },
     {
-      "owner": "Bob",
-      "status": true,
-      "body": "Ullamco irure laborum magna dolor non. Anim occaecat adipisicing cillum eu magna in.",
-      "category": "homework"
+      owner: 'Bob',
+      status: true,
+      body: 'Ullamco irure laborum magna dolor non. Anim occaecat adipisicing cillum eu magna in.',
+      category: 'homework'
     },
     {
-      "owner": "Blanche",
-      "status": true,
-      "body": "Incididunt enim ea sit qui esse magna eu. Nisi sunt exercitation est Lorem consectetur incididunt cupidatat laboris commodo veniam do ut sint.",
-      "category": "software design"
+      owner: 'Blanche',
+      status: true,
+      body: 'Incididunt enim ea sit qui esse commodo veniam do ut sint.',
+      category: 'software design'
     }
   ];
   let todoService: TodoService;
@@ -72,8 +72,8 @@ describe('TodoService', () => {
       // triggers the subscribe above, which leads to that check
       // actually being performed.
       req.flush(testTodos);
-    })
-  })
+    });
+  });
 
   describe('Calling getTodos() with parameters correct forms the HTTP request', () => {
 
@@ -114,7 +114,10 @@ describe('TodoService', () => {
     });
 
 
-  })
+
+
+
+  });
 
 
 

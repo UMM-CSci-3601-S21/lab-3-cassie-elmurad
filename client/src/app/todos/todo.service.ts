@@ -16,7 +16,7 @@ export class TodoService {
 
   }
 
-  getTodos(filters?: { body?: string; owner?: string;  }): Observable<Todo[]> {
+  getTodos(filters?: { body?: string; owner?: string  }): Observable<Todo[]> {
     let httpParams: HttpParams = new HttpParams();
     if (filters) {
       if (filters.body) {
@@ -31,7 +31,7 @@ export class TodoService {
     });
   }
 
-  filterTodos(todos: Todo[], filters: { status?: boolean; category?:string }): Todo[] {
+  filterTodos(todos: Todo[], filters: { status?: boolean; category?: string }): Todo[] {
 
     let filteredTodos = todos;
 
