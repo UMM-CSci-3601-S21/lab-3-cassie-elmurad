@@ -10,9 +10,9 @@
 
       <mat-form-field class="input-field">
         <mat-label>Owner</mat-label>
-        <input matInput id="todo-owner-input" placeholder="Filter by Owner">
-        <!-- in the input above is where ngModel needs to be used for input control (I think)  -->
-        <mat-hint>Filtered on client</mat-hint>
+        <input matInput id="todo-name-input" placeholder="Filter by Owner"
+            [(ngModel)]="todoOwner" (input)="getTodosFromServer()">
+        <mat-hint>Filtered on server</mat-hint>
 
       </mat-form-field>
 
@@ -36,6 +36,32 @@
         <!-- add to input tag above to filter from server -->
         <mat-hint>Filtered on server</mat-hint>
       </mat-form-field>
+
+
+      </div>
+
+      <div fxLayout="row">
+        <div fxFlex fxFlex.gt-sm="80" fxFlexOffset.gt-sm="10" *ngIf="serverFilteredTodos" >
+          <!-- Switch between card and list view based on the viewType variable, set above in the mar-radio-group -->
+          <div [ngSwitch]="viewType">
+
+
+
+            <!-- List view -->
+            <mat-card >
+              <mat-card-content>
+                <mat-nav-list class="todo-nav-list">
+                  <h3 mat-subheader>Todos</h3>
+                  <a mat-list-item *ngFor="let todo of this.filteredTodos" [routerLink]="['/todos', todo.owner]" class="todo-list-item">
+                    <h3 matLine class="todo-list-name"> {{todo.owner}} </h3>
+                    <p matLine class="todo-list-role"> {{todo.body}} </p>
+                  </a>
+                </mat-nav-list>
+              </mat-card-content>
+            </mat-card>
+
+          </div>
+
 
 
 
