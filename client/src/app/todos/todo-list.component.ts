@@ -8,7 +8,7 @@ import { HttpClientModule } from '@angular/common/http';
   selector: 'app-todo-list',
   templateUrl: 'todo-list.component.html',
   styleUrls: ['./todo-list.component.scss'],
-  providers: [TodoService, HttpClientModule, ]
+  providers: [ TodoService]
 })
 export class TodoListComponent implements OnInit {
 
@@ -20,15 +20,13 @@ export class TodoListComponent implements OnInit {
   public todoCategory: string;
   public todoStatus: boolean;
   public todoOwner: string;
-  viewType: 'list';
-  // public todoId: string;
-
+  public viewType: 'list';
 
 
   constructor(private todoService: TodoService, private snackBar: MatSnackBar ) {
 
   }
-s
+
   getTodosFromServer() {
     this.todoService.getTodos({
       body: this.todoBody,
@@ -44,8 +42,9 @@ s
         'OK',
         // The message will disappear after 3 seconds.
         { duration: 3000 });
-      });
-    }
+
+    });
+}
 
   public updateFilter() {
     this.filteredTodos = this.todoService.filterTodos(
