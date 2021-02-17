@@ -57,7 +57,7 @@ describe('TodoService', () => {
   });
 
   describe('getTodos()', () =>{
-    it( 'cassls api/todos when getTodos() is called with no parameters', () =>{
+    it( 'calls api/todos when getTodos() is called with no parameters', () =>{
       todoService.getTodos().subscribe(
         todos => expect(todos).toBe(testTodos)
       );
