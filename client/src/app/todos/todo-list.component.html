@@ -3,14 +3,14 @@
   <div fxFlex fxFlex.gt-sm="80" fxFlexOffset.gt-sm="10">
 
     <mat-card class="search-card">
-      <mat-card-title class="todo-list-owner">Todos</mat-card-title>
+      <mat-card-title class="todo-list-title">Todos</mat-card-title>
       <mat-card-content fxLayout="column" >
 
         <div fxLayout="row wrap" fxLayoutGap="10px">
 
       <mat-form-field class="input-field">
         <mat-label>Owner</mat-label>
-        <input matInput id="todo-name-input" placeholder="Filter by Owner"
+        <input matInput id="todo-owner-input" placeholder="Filter by Owner"
             [(ngModel)]="todoOwner" (input)="getTodosFromServer()">
         <mat-hint>Filtered on server</mat-hint>
 
@@ -53,8 +53,8 @@
                 <mat-nav-list class="todo-nav-list">
                   <h3 mat-subheader>Todos</h3>
                   <a mat-list-item *ngFor="let todo of this.filteredTodos" [routerLink]="['/todos', todo.owner]" class="todo-list-item">
-                    <h3 matLine class="todo-list-name"> {{todo.owner}} </h3>
-                    <p matLine class="todo-list-role"> {{todo.body}} </p>
+                    <h3 matLine class="todo-list-owner"> {{todo.owner}} </h3>
+                    <p matLine class="todo-list-body"> {{todo.body}} </p>
                   </a>
                 </mat-nav-list>
               </mat-card-content>
