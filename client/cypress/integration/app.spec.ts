@@ -43,6 +43,12 @@ describe('App', () => {
       page.getNavLink('Home').click();
       cy.url().should('match', /.*\/$/);
     });
+
+    it('Should have a working navigation to "To-dos"', () =>{
+      page.getSidenavButton().click();
+      page.getNavLink('To-dos').click();
+      cy.url().should('match', /.*\/todos$/);
+    });
   });
 
 });
