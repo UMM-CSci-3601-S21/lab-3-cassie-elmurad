@@ -62,6 +62,16 @@ describe('Todos list', () => {
       .should('not.contain.text', 'false');
   });
 
+  it('should type something for filtering into the body input and return correct elements', () => {
+    // get the todo body input
+    cy.get('#todo-body-input').type('tempor')
+
+    page.getTodoListItems().find('.todo-list-body')
+
+    .should('contain.text', 'tempor');
+
+  });
+
 
 });
 
