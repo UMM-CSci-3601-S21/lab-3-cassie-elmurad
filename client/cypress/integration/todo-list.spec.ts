@@ -24,6 +24,20 @@ describe('Todos list', () => {
 
   });
 
+  it('Should type something in the category filter and check that it returned correct elements', () => {
+    // Filter for users of age '27'
+    cy.get('#todo-category-input').type('d');
+
+    // Go through each of the cards that are being shown and get the names
+    page.getTodoListItems().find('.todo-list-category')
+      // We should see these users whose age is 27
+      .should('contain.text', 'video games')
+      .should('contain.text', 'software design')
+      // We shouldn't see these users
+      .should('not.contain.text', 'groceries')
+      .should('not.contain.text', 'homework');
+  });
+
 
 });
 
