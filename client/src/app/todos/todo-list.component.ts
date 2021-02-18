@@ -19,7 +19,7 @@ export class TodoListComponent implements OnInit {
   public todoBody: string;
   public todoCategory: string;
   public todoStatus: string;
-  public todoOwner: string;s
+  public todoOwner: string;
   public viewType: 'list';
 
 
