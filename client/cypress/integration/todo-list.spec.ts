@@ -25,17 +25,41 @@ describe('Todos list', () => {
   });
 
   it('Should type something in the category filter and check that it returned correct elements', () => {
-    // Filter for users of age '27'
+    // Filter for todo of categories with a 'd' in them
     cy.get('#todo-category-input').type('d');
 
-    // Go through each of the cards that are being shown and get the names
+
     page.getTodoListItems().find('.todo-list-category')
-      // We should see these users whose age is 27
+
       .should('contain.text', 'video games')
       .should('contain.text', 'software design')
-      // We shouldn't see these users
+       // should not return these categories
       .should('not.contain.text', 'groceries')
       .should('not.contain.text', 'homework');
+  });
+
+  it('Should type false in the status filter and check that it returned correct elements', () => {
+    // Filter for todo of false status
+    cy.get('#todo-status-input').type('false');
+
+
+    page.getTodoListItems().find('.todo-list-status')
+
+      .should('contain.text', 'false')
+      // there shoul dnot be any todos with a true status
+      .should('not.contain.text', 'true');
+  });
+
+  it('Should type true in the status filter and check that it returned correct elements', () => {
+    // Filter for todos with true status
+    cy.get('#todo-status-input').type('true');
+
+
+    page.getTodoListItems().find('.todo-list-status')
+
+      .should('contain.text', 'true')
+      // there should not be todos with a false status
+      .should('not.contain.text', 'false');
   });
 
 
