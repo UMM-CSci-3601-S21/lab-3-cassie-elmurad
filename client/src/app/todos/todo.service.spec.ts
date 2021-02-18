@@ -8,25 +8,25 @@ describe('TodoService', () => {
   const testTodos: Todo[] = [
     {
       owner: 'Blanche',
-      status: false,
+      status: 'false',
       body: 'In sunt ex non tempor cillum commodo amet incididunt anim qui commodo quis. Cillum non labore ex sint esse.',
       category: 'software design'
     },
     {
       owner: 'Fry',
-      status: false,
+      status: 'false',
       body: 'Ipsum esse est ullamco magna tempor anim laborum non officia deserunt veniam commodo. Aute minim incididunt ex commodo.',
       category: 'video games'
     },
     {
       owner: 'Bob',
-      status: true,
+      status: 'true',
       body: 'Ullamco irure laborum magna dolor non. Anim occaecat adipisicing cillum eu magna in.',
       category: 'homework'
     },
     {
       owner: 'Blanche',
-      status: true,
+      status: 'true',
       body: 'Incididunt enim ea sit qui esse commodo veniam do ut sint.',
       category: 'software design'
     }
@@ -133,6 +133,18 @@ describe('TodoService', () => {
       // Every returned Todo's name should contain an 'i'.
       filteredTodos.forEach(todo => {
         expect(todo.category.indexOf(todoCategory)).toBeGreaterThanOrEqual(0);
+      });
+    });
+
+    it('filters by status', () => {
+      const todoStatus = 'false';
+      const filteredTodos = todoService.filterTodos(testTodos, { status: todoStatus });
+      // There should be 1 todo with an 'i' in their
+      // category: video games.
+      expect(filteredTodos.length).toBe(2);
+      // Every returned Todo's status should contain false.
+      filteredTodos.forEach(todo => {
+        expect(todo.status.indexOf(todoStatus)).toBeGreaterThanOrEqual(0);
       });
     });
 

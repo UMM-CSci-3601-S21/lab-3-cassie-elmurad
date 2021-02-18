@@ -12,19 +12,19 @@ export class MockTodoService extends TodoService {
   static testTodos: Todo[] = [
     {
       owner: 'Blanche',
-      status: false,
+      status: 'false',
       body: 'In sunt ex non tempor cillum commodo amet incididunt anim qui commodo quis. Cillum non labore ex sint esse.',
       category: 'software design'
     },
     {
       owner: 'Fry',
-      status: false,
+      status: 'false',
       body: 'Ipsum esse est ullamco magna tempor anim laborum non officia deserunt veniam commodo. Aute minim incididunt ex commodo.',
       category: 'video games'
     },
     {
       owner: 'Bob',
-      status: true,
+      status: 'true',
       body: 'Ullamco irure laborum magna dolor non. Anim occaecat adipisicing cillum eu magna in.',
       category: 'homework'
     },
