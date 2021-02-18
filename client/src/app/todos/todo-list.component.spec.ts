@@ -1,4 +1,3 @@
-import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
@@ -16,7 +15,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterTestingModule } from '@angular/router/testing';
 import { Observable } from 'rxjs';
-import { MockTodoService } from './todo.service.mock';
+import { MockTodoService } from '../../testing/todo.service.mock';
 import { TodoListComponent } from './todo-list.component';
 import { TodoService } from './todo.service';
 import { Todo } from './todo';
@@ -37,7 +36,6 @@ const COMMON_IMPORTS: any[] = [
   MatSnackBarModule,
   BrowserAnimationsModule,
   RouterTestingModule,
-  HttpClientTestingModule
 ];
 
 describe('TodoListComponent', () => {
@@ -47,7 +45,7 @@ describe('TodoListComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [COMMON_IMPORTS, HttpClientTestingModule],
+      imports: [COMMON_IMPORTS],
       declarations: [TodoListComponent],
 
       providers: [{ provide: TodoService, useValue: new MockTodoService() }]
@@ -62,6 +60,11 @@ describe('TodoListComponent', () => {
       fixture.detectChanges();
     });
   }));
+
+
+
+
+
 
 
 });
