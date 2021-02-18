@@ -20,6 +20,7 @@ export class TodoListComponent implements OnInit {
   public todoCategory: string;
   public todoStatus: string;
   public todoOwner: string;
+  public sortBy:  '' | 'body' | 'status';
   public viewType: 'list';
 
 

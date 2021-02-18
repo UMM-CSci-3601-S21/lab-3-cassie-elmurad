@@ -45,6 +45,16 @@
       </mat-form-field>
 
 
+      <div fxLayout="row wrap" fxLayoutGap="10px">
+        <label>View type: </label>
+        <mat-radio-group aria-label="Sort by" [(ngModel)]="sortBy" data-test="sortByRadio">
+          <mat-radio-button value="body" (value)="getTodosFromServer()">Body</mat-radio-button>
+          <mat-radio-button value="status">Status</mat-radio-button>
+        </mat-radio-group>
+      </div>
+
+
+
 
 
       </div>
@@ -52,8 +62,7 @@
       <div fxLayout="row">
         <div fxFlex fxFlex.gt-sm="80" fxFlexOffset.gt-sm="10" *ngIf="serverFilteredTodos" >
           <!-- Switch between card and list view based on the viewType variable, set above in the mar-radio-group -->
-          <div [ngSwitch]="viewType">
-
+          <div >
 
 
             <!-- List view -->
@@ -72,6 +81,8 @@
             </mat-card>
 
           </div>
+
+
 
 
 

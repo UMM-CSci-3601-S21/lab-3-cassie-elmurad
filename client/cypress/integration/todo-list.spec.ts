@@ -72,6 +72,16 @@ describe('Todos list', () => {
 
   });
 
+  it('should sort todos based on a chosen value', () => {
+    // get the todo body input
+    // cy.get('#todo-sort-select').click;
+
+    // page.getBodySortSelect().find('.body-sort-select').click()
+    page.changeSort('body');
+
+  });
 
 });
+
+
 
