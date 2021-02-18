@@ -18,8 +18,8 @@ export class TodoListComponent implements OnInit {
   // Made public so that tests can reference them
   public todoBody: string;
   public todoCategory: string;
-  public todoStatus: boolean;
-  public todoOwner: string;
+  public todoStatus: string;
+  public todoOwner: string;s
   public viewType: 'list';
 
 
@@ -48,7 +48,7 @@ export class TodoListComponent implements OnInit {
 
   public updateFilter() {
     this.filteredTodos = this.todoService.filterTodos(
-      this.serverFilteredTodos, {status: this.todoStatus,  category: this.todoCategory, });
+      this.serverFilteredTodos, { status: this.todoStatus, category: this.todoCategory, });
   }
 
   ngOnInit(): void {
