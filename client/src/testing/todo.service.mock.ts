@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
-import { TodoService } from './todo.service';
-import { Todo } from './todo';
+import { TodoService } from '../app/todos/todo.service';
+import { Todo } from '../app/todos/todo';
 
 /**
  * A "mock" version of the `Todoservice` that can be used to test components
@@ -9,7 +9,7 @@ import { Todo } from './todo';
  */
 @Injectable()
 export class MockTodoService extends TodoService {
-  static testTodos: Todo[] = [
+  public static testTodos: Todo[] = [
     {
       owner: 'Blanche',
       status: 'false',
@@ -34,10 +34,11 @@ export class MockTodoService extends TodoService {
     super(null);
   }
 
-  getTodos(filters: {body?: string; owner?: string }): Observable<Todo[]> {
+  getTodos(filters: { status?: string; body?: string; }): Observable<Todo[]> {
     // Our goal here isn't to test (and thus rewrite) the service, so we'll
-    // keep it simple and just return the test Todos regardless of what
+    // keep it simple and just return the test users regardless of what
     // filters are passed in.
     return of(MockTodoService.testTodos);
   }
+
 }
