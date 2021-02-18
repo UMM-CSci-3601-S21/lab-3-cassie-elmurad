@@ -18,8 +18,8 @@
 
       <mat-form-field class="input-field">
         <mat-label>Category</mat-label>
-        <input matInput id="todo-category-input" placeholder="Filter by Category">
-        <!-- in the input above is where ngModel needs to be used for input control (I think)  -->
+        <input matInput id="todo-category-input" placeholder="Filter by Owner"
+            [(ngModel)]="todoCategory" (input)="getTodosFromServer()">
         <mat-hint>Filtered on client</mat-hint>
       </mat-form-field>
 
@@ -55,6 +55,7 @@
                   <a mat-list-item *ngFor="let todo of this.filteredTodos" [routerLink]="['/todos', todo.owner]" class="todo-list-item">
                     <h3 matLine class="todo-list-owner"> {{todo.owner}} </h3>
                     <p matLine class="todo-list-body"> {{todo.body}} </p>
+                    <p matLine class="todo-list-category"> {{todo.category}} </p>
                   </a>
                 </mat-nav-list>
               </mat-card-content>

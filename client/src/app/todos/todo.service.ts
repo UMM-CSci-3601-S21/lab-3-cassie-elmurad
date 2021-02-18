@@ -35,7 +35,7 @@ export class TodoService {
 
     let filteredTodos = todos;
 
-    //filter by owner
+    //filter by category
     if (filters.category) {
       filters.category = filters.category.toLowerCase();
 
