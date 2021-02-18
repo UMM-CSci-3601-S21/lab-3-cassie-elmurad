@@ -12,6 +12,14 @@ export class TodoListPage{
     return cy.get('.todo-list-title');
   }
 
+  getBodySortSelect(){
+    return cy.get('.todo-sort-select');
+  }
+
+  changeSort(sortBy: 'status' | 'body' | 'owner' | 'category') {
+    return cy.get(`[data-test=sortByRadio] .mat-radio-button[value="${sortBy}"]`).click();
+  }
+
 
 
 
