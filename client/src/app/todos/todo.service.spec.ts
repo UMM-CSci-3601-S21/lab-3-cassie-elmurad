@@ -96,20 +96,43 @@ describe('TodoService', () => {
       req.flush(testTodos);
     });
 
+    it('correctly calls api/todos with multiple filter parameters', () => {
+
+      todoService.getTodos({ body: 'tempor', owner: 'Fry' }).subscribe(
+        todos => expect(todos).toBe(testTodos)
+      );
+
+      // Specify that (exactly) one request will be made to the specified URL with the role parameter.
+      const req = httpTestingController.expectOne(
+        (request) => request.url.startsWith(todoService.todoUrl)
+          && request.params.has('body') && request.params.has('owner')
+      );
+
+      // Check that the request made to that URL was a GET request.
+      expect(req.request.method).toEqual('GET');
+
+      // Check that the parameters are correct
+      expect(req.request.params.get('owner')).toEqual('Fry');
+      expect(req.request.params.get('body')).toEqual('tempor');
+
+
+      req.flush(testTodos);
+    });
+
   });
 
-  describe('filterUsers()', () => {
+  describe('filterTodos()', () => {
 
 
     it('filters by category', () => {
       const todoCategory = 'video games';
-      const filteredUsers = todoService.filterTodos(testTodos, { category: todoCategory });
+      const filteredTodos = todoService.filterTodos(testTodos, { category: todoCategory });
       // There should be 1 todo with an 'i' in their
       // category: video games.
-      expect(filteredUsers.length).toBe(1);
-      // Every returned user's name should contain an 'i'.
-      filteredUsers.forEach(user => {
-        expect(user.category.indexOf(todoCategory)).toBeGreaterThanOrEqual(0);
+      expect(filteredTodos.length).toBe(1);
+      // Every returned Todo's name should contain an 'i'.
+      filteredTodos.forEach(todo => {
+        expect(todo.category.indexOf(todoCategory)).toBeGreaterThanOrEqual(0);
       });
     });
 
