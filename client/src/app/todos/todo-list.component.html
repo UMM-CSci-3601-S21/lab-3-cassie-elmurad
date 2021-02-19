@@ -32,8 +32,8 @@
 
       <mat-form-field class="input-field">
         <mat-label>Body</mat-label>
-        <input matInput id="todo-body-input"  placeholder="Filter by Body">
-        <!-- add to input tag above to filter from server -->
+        <input matInput id="todo-category-input" placeholder="Filter by Category"
+            [(ngModel)]="todoBody" (input)="getTodosFromServer()">
         <mat-hint>Filtered on server</mat-hint>
       </mat-form-field>
 
@@ -54,6 +54,7 @@
           <mat-radio-button value="body" (input)="updateBodySort()" >Body</mat-radio-button>
           <mat-radio-button value="owner" (input)="updateOwnerSort()" >Owner</mat-radio-button>
           <mat-radio-button value="status" (input)="updateStatusSort()" >Status</mat-radio-button>
+          <mat-radio-button value="category" (input)="updateCategorySort()" >Category</mat-radio-button>
         </mat-radio-group>
       </div>
 

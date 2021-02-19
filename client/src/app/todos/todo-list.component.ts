@@ -21,7 +21,7 @@ export class TodoListComponent implements OnInit {
   public todoCategory: string;
   public todoStatus: string;
   public todoOwner: string;
-  public sortBy:  '' | 'body' | 'status';
+  public sortBy:    'body' | 'status' | 'owner' | 'category'= 'owner';
   public viewType: 'list';
 
 
@@ -32,7 +32,8 @@ export class TodoListComponent implements OnInit {
   getTodosFromServer() {
     this.todoService.getTodos({
       body: this.todoBody,
-      owner: this.todoOwner
+      owner: this.todoOwner,
+      order: this.sortBy,
     }).subscribe(returnedTodos => {
       this.serverFilteredTodos = returnedTodos;
       this.updateFilter();
@@ -54,7 +55,7 @@ export class TodoListComponent implements OnInit {
 
   public updateFilter() {
     this.filteredTodos = this.todoService.filterTodos(
-      this.serverFilteredTodos, { status: this.todoStatus, category: this.todoCategory });
+      this.serverFilteredTodos, { status: this.todoStatus, category: this.todoCategory, body: this.todoBody });
   }
   public updateBodySort(){
     this.filteredTodos = this.todoService.sortTodosByBody(
@@ -66,6 +67,10 @@ export class TodoListComponent implements OnInit {
   }
   public updateStatusSort(){
     this.filteredTodos = this.todoService.sortTodosByStatus(
+      this.serverFilteredTodos);
+  }
+  public updateCategorySort(){
+    this.filteredTodos = this.todoService.sortTodosByCategory(
       this.serverFilteredTodos);
   }
 
