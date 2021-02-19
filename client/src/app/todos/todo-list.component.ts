@@ -49,7 +49,7 @@ export class TodoListComponent implements OnInit {
 
     });
   }
-  
+
   public setSortBy(sortBy: 'body' | 'status' | 'owner' | 'category' = 'owner') {
     this.sortBy = sortBy;
   }
