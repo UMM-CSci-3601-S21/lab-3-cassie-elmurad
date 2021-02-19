@@ -55,8 +55,8 @@ export class TodoService {
     let filteredTodos = todos;
 
     filteredTodos = todos.sort(function(a, b) {
-      var nameA = a.body.toUpperCase(); // ignore upper and lowercase
-      var nameB = b.body.toUpperCase(); // ignore upper and lowercase
+      const nameA = a.body.toUpperCase(); // ignore upper and lowercase
+      const nameB = b.body.toUpperCase(); // ignore upper and lowercase
       if (nameA < nameB) {
         return -1;
       }
@@ -74,8 +74,8 @@ export class TodoService {
     let filteredTodos = todos;
 
     filteredTodos = todos.sort(function(a, b) {
-      var nameA = a.owner.toUpperCase(); // ignore upper and lowercase
-      var nameB = b.owner.toUpperCase(); // ignore upper and lowercase
+      const nameA = a.owner.toUpperCase(); // ignore upper and lowercase
+      const nameB = b.owner.toUpperCase(); // ignore upper and lowercase
       if (nameA < nameB) {
         return -1;
       }
