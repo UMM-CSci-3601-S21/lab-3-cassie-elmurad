@@ -162,6 +162,36 @@ describe('TodoService', () => {
 
       }
     })
+
+    it('sorts todos by category', () => {
+      const sortField = 'category';
+      const filteredTodos = todoService.sortTodos(testTodos, sortField);
+
+      for(let i=0; i<filteredTodos.length-1; i++){
+        expect((filteredTodos[i][sortField]).localeCompare(filteredTodos[i+1][sortField])).toBeLessThanOrEqual(0);
+
+      }
+    })
+
+    it('sorts todos by status', () => {
+      const sortField = 'status';
+      const filteredTodos = todoService.sortTodos(testTodos, sortField);
+
+      for(let i=0; i<filteredTodos.length-1; i++){
+        expect((filteredTodos[i][sortField]).localeCompare(filteredTodos[i+1][sortField])).toBeLessThanOrEqual(0);
+
+      }
+    })
+
+    it('sorts todos by owner', () => {
+      const sortField = 'owner';
+      const filteredTodos = todoService.sortTodos(testTodos, sortField);
+
+      for(let i=0; i<filteredTodos.length-1; i++){
+        expect((filteredTodos[i][sortField]).localeCompare(filteredTodos[i+1][sortField])).toBeLessThanOrEqual(0);
+
+      }
+    })
   });
 
 
