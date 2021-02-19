@@ -16,7 +16,7 @@ export class TodoService {
 
   }
 
-  getTodos(filters?: { body?: string; owner?: string; order?:string }): Observable<Todo[]> {
+  getTodos(filters?: { body?: string; owner?: string; order?: string }): Observable<Todo[]> {
     let httpParams: HttpParams = new HttpParams();
     if (filters) {
       if (filters.body) {
@@ -54,78 +54,15 @@ export class TodoService {
     return filteredTodos;
   }
 
-  sortTodosByBody(todos: Todo[]){
-       let filteredTodos = todos;
-
-    filteredTodos = filteredTodos.sort(function(a, b) {
-      const nameA = a.body.toUpperCase(); // ignore upper and lowercase
-      const nameB = b.body.toUpperCase(); // ignore upper and lowercase
-      return(nameA.localeCompare(nameB));
-    });
-    return filteredTodos;
-  }
   sortTodos(todos: Todo[], sortField: string){
     let filteredTodos = todos;
 
-    filteredTodos = filteredTodos.sort(function(a, b) {
-      const nameA = a[sortField].toString().toUpperCase(); // ignore upper and lowercase
-      const nameB = b[sortField].toString().toUpperCase(); // ignore upper and lowercase
+    filteredTodos = filteredTodos.sort((a, b) => {
+      const nameA = a[sortField].toString().toUpperCase();
+      const nameB = b[sortField].toString().toUpperCase();
       return(nameA.localeCompare(nameB));
     });
     return filteredTodos;
   }
-
-
-
-  sortTodosByOwner(todos: Todo[]){
-    let filteredTodos = todos;
-
-    filteredTodos = filteredTodos.sort(function(a, b) {
-      const nameA = a.owner.toUpperCase(); // ignore upper and lowercase
-      const nameB = b.owner.toUpperCase(); // ignore upper and lowercase
-      return(nameA.localeCompare(nameB));
-    });
-    return filteredTodos;
-  }
-
-  sortTodosByStatus(todos: Todo[]){
-    let filteredTodos = todos;
-
-    filteredTodos = filteredTodos.sort(function(a, b) {
-      const nameA = a.status.toString().toUpperCase(); // ignore upper and lowercase
-      const nameB = b.status.toString().toUpperCase(); // ignore upper and lowercase
-      return(nameA.localeCompare(nameB));
-    });
-    return filteredTodos;
-  }
-
-  sortTodosByCategory(todos: Todo[]){
-    let filteredTodos = todos;
-
-    filteredTodos = filteredTodos.sort(function(a, b) {
-      const nameA = a.category.toUpperCase(); // ignore upper and lowercase
-      const nameB = b.category.toUpperCase(); // ignore upper and lowercase
-      return(nameA.localeCompare(nameB));
-    });
-    return filteredTodos;
-
-
-  }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 }

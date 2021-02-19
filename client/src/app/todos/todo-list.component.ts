@@ -9,7 +9,7 @@ import { ArrayDataSource } from '@angular/cdk/collections';
   selector: 'app-todo-list',
   templateUrl: 'todo-list.component.html',
   styleUrls: ['./todo-list.component.scss'],
-  providers: [ TodoService]
+  providers: [TodoService]
 })
 export class TodoListComponent implements OnInit {
 
@@ -21,11 +21,11 @@ export class TodoListComponent implements OnInit {
   public todoCategory: string;
   public todoStatus: string;
   public todoOwner: string;
-  public sortBy:    'body' | 'status' | 'owner' | 'category'= 'owner';
+  public sortBy: 'body' | 'status' | 'owner' | 'category' = 'owner';
   public viewType: 'list';
 
 
-  constructor(private todoService: TodoService, private snackBar: MatSnackBar ) {
+  constructor(private todoService: TodoService, private snackBar: MatSnackBar) {
 
   }
 
@@ -48,11 +48,9 @@ export class TodoListComponent implements OnInit {
         { duration: 3000 });
 
     });
-
-
-
-}
-  public setSortBy(sortBy:'body' | 'status' | 'owner' | 'category'= 'owner'){
+  }
+  
+  public setSortBy(sortBy: 'body' | 'status' | 'owner' | 'category' = 'owner') {
     this.sortBy = sortBy;
   }
 
@@ -61,13 +59,11 @@ export class TodoListComponent implements OnInit {
       this.serverFilteredTodos, { status: this.todoStatus, category: this.todoCategory, body: this.todoBody });
   }
 
-  public updateSort(sortField: string){
-    this.filteredTodos= this.todoService.sortTodos(
+  public updateSort(sortField: string) {
+    this.filteredTodos = this.todoService.sortTodos(
       this.serverFilteredTodos, sortField);
 
   }
-
-
 
   ngOnInit(): void {
     this.getTodosFromServer();
