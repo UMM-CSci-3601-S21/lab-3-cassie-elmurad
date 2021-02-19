@@ -3,6 +3,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { Todo } from './todo';
 import { TodoService } from './todo.service';
 import { HttpClientModule } from '@angular/common/http';
+import { ArrayDataSource } from '@angular/cdk/collections';
 
 @Component({
   selector: 'app-todo-list',
@@ -35,6 +36,7 @@ export class TodoListComponent implements OnInit {
     }).subscribe(returnedTodos => {
       this.serverFilteredTodos = returnedTodos;
       this.updateFilter();
+
     }, err => {
       // If there was an error getting the todos, display
       // a message.
@@ -45,12 +47,22 @@ export class TodoListComponent implements OnInit {
         { duration: 3000 });
 
     });
+
+
+
 }
 
   public updateFilter() {
     this.filteredTodos = this.todoService.filterTodos(
       this.serverFilteredTodos, { status: this.todoStatus, category: this.todoCategory });
   }
+  public updateSort(){
+    this.filteredTodos = this.todoService.sortTodos(
+      this.serverFilteredTodos);
+  }
+
+
+
 
   ngOnInit(): void {
     this.getTodosFromServer();

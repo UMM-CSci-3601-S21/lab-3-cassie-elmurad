@@ -41,16 +41,47 @@ export class TodoService {
       filters.category = filters.category.toLowerCase();
 
       filteredTodos = filteredTodos.filter(todo => todo.category.toLowerCase().indexOf(filters.category) !== -1);
+
     }
     if (filters.status){
       filters.status = filters.status.toLowerCase();
       filteredTodos = filteredTodos.filter(todo => todo.status.toString().toLowerCase().indexOf(filters.status) !== -1);
     }
-
-
-
     return filteredTodos;
   }
+
+  sortTodos(todos: Todo[]){
+
+    let filteredTodos = todos;
+
+    filteredTodos = todos.sort(function(a, b) {
+      var nameA = a.body.toUpperCase(); // ignore upper and lowercase
+      var nameB = b.body.toUpperCase(); // ignore upper and lowercase
+      if (nameA < nameB) {
+        return -1;
+      }
+      if (nameA > nameB) {
+        return 1;
+      }
+      // names must be equal
+      return 0;
+    });
+    return filteredTodos;
+
+
+  }
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 }
