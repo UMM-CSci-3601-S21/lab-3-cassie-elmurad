@@ -56,8 +56,12 @@ export class TodoListComponent implements OnInit {
     this.filteredTodos = this.todoService.filterTodos(
       this.serverFilteredTodos, { status: this.todoStatus, category: this.todoCategory });
   }
-  public updateSort(){
-    this.filteredTodos = this.todoService.sortTodos(
+  public updateBodySort(){
+    this.filteredTodos = this.todoService.sortTodosByBody(
+      this.serverFilteredTodos);
+  }
+  public updateOwnerSort(){
+    this.filteredTodos = this.todoService.sortTodosByOwner(
       this.serverFilteredTodos);
   }
 

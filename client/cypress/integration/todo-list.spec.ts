@@ -72,12 +72,15 @@ describe('Todos list', () => {
 
   });
 
-  it('should sort todos based on a chosen value', () => {
-    // get the todo body input
-    // cy.get('#todo-sort-select').click;
-
-    // page.getBodySortSelect().find('.body-sort-select').click()
+  it('should sort todos based on a body', () => {
     page.changeSort('body');
+    page.getTodoListItems().find('.todo-list-body')
+
+
+  });
+
+  it('should sort todos based on a owner value', () => {
+    page.changeSort('owner');
 
   });
 

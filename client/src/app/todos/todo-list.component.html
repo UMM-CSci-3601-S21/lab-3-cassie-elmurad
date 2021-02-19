@@ -49,9 +49,10 @@
 
 
       <div fxLayout="row wrap" fxLayoutGap="10px">
-        <label>Sort By: </label>
+        <label>Sort By</label>
         <mat-radio-group aria-label="Sort by" [(ngModel)]="sortBy" data-test="sortByRadio">
-          <mat-radio-button value="body" (input)="updateSort()" >Body</mat-radio-button>
+          <mat-radio-button value="body" (input)="updateBodySort()" >Body</mat-radio-button>
+          <mat-radio-button value="owner" (input)="updateOwnerSort()" >Owner</mat-radio-button>
           <mat-radio-button value="status">Status</mat-radio-button>
         </mat-radio-group>
       </div>
