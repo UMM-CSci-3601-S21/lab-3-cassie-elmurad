@@ -52,28 +52,20 @@ export class TodoListComponent implements OnInit {
 
 
 }
+  public setSortBy(sortBy:'body' | 'status' | 'owner' | 'category'= 'owner'){
+    this.sortBy = sortBy;
+  }
 
   public updateFilter() {
     this.filteredTodos = this.todoService.filterTodos(
       this.serverFilteredTodos, { status: this.todoStatus, category: this.todoCategory, body: this.todoBody });
   }
-  public updateBodySort(){
-    this.filteredTodos = this.todoService.sortTodosByBody(
-      this.serverFilteredTodos);
-  }
-  public updateOwnerSort(){
-    this.filteredTodos = this.todoService.sortTodosByOwner(
-      this.serverFilteredTodos);
-  }
-  public updateStatusSort(){
-    this.filteredTodos = this.todoService.sortTodosByStatus(
-      this.serverFilteredTodos);
-  }
-  public updateCategorySort(){
-    this.filteredTodos = this.todoService.sortTodosByCategory(
-      this.serverFilteredTodos);
-  }
 
+  public updateSort(sortField: string){
+    this.filteredTodos= this.todoService.sortTodos(
+      this.serverFilteredTodos, sortField);
+
+  }
 
 
 

@@ -55,23 +55,27 @@ export class TodoService {
   }
 
   sortTodosByBody(todos: Todo[]){
-
-    let filteredTodos = todos;
+       let filteredTodos = todos;
 
     filteredTodos = filteredTodos.sort(function(a, b) {
       const nameA = a.body.toUpperCase(); // ignore upper and lowercase
       const nameB = b.body.toUpperCase(); // ignore upper and lowercase
-      if (nameA < nameB) {
-        return -1;
-      }
-      if (nameA > nameB) {
-        return 1;
-      }
-      // names must be equal
-      return 0;
+      return(nameA.localeCompare(nameB));
     });
     return filteredTodos;
   }
+  sortTodos(todos: Todo[], sortField: string){
+    let filteredTodos = todos;
+
+    filteredTodos = filteredTodos.sort(function(a, b) {
+      const nameA = a[sortField].toString().toUpperCase(); // ignore upper and lowercase
+      const nameB = b[sortField].toString().toUpperCase(); // ignore upper and lowercase
+      return(nameA.localeCompare(nameB));
+    });
+    return filteredTodos;
+  }
+
+
 
   sortTodosByOwner(todos: Todo[]){
     let filteredTodos = todos;
@@ -79,14 +83,7 @@ export class TodoService {
     filteredTodos = filteredTodos.sort(function(a, b) {
       const nameA = a.owner.toUpperCase(); // ignore upper and lowercase
       const nameB = b.owner.toUpperCase(); // ignore upper and lowercase
-      if (nameA < nameB) {
-        return -1;
-      }
-      if (nameA > nameB) {
-        return 1;
-      }
-      // names must be equal
-      return 0;
+      return(nameA.localeCompare(nameB));
     });
     return filteredTodos;
   }
@@ -97,14 +94,7 @@ export class TodoService {
     filteredTodos = filteredTodos.sort(function(a, b) {
       const nameA = a.status.toString().toUpperCase(); // ignore upper and lowercase
       const nameB = b.status.toString().toUpperCase(); // ignore upper and lowercase
-      if (nameA < nameB) {
-        return -1;
-      }
-      if (nameA > nameB) {
-        return 1;
-      }
-      // names must be equal
-      return 0;
+      return(nameA.localeCompare(nameB));
     });
     return filteredTodos;
   }
@@ -115,14 +105,7 @@ export class TodoService {
     filteredTodos = filteredTodos.sort(function(a, b) {
       const nameA = a.category.toUpperCase(); // ignore upper and lowercase
       const nameB = b.category.toUpperCase(); // ignore upper and lowercase
-      if (nameA < nameB) {
-        return -1;
-      }
-      if (nameA > nameB) {
-        return 1;
-      }
-      // names must be equal
-      return 0;
+      return(nameA.localeCompare(nameB));
     });
     return filteredTodos;
 
