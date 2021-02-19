@@ -70,7 +70,6 @@ export class TodoService {
   }
 
   sortTodosByOwner(todos: Todo[]){
-
     let filteredTodos = todos;
 
     filteredTodos = todos.sort(function(a, b) {
@@ -86,9 +85,47 @@ export class TodoService {
       return 0;
     });
     return filteredTodos;
+  }
+
+  sortTodosByStatus(todos: Todo[]){
+    let filteredTodos = todos;
+
+    filteredTodos = todos.sort(function(a, b) {
+      const nameA = a.status.toString().toUpperCase(); // ignore upper and lowercase
+      const nameB = b.status.toString().toUpperCase(); // ignore upper and lowercase
+      if (nameA < nameB) {
+        return -1;
+      }
+      if (nameA > nameB) {
+        return 1;
+      }
+      // names must be equal
+      return 0;
+    });
+    return filteredTodos;
+  }
+
+  sortTodosByCategory(todos: Todo[]){
+    let filteredTodos = todos;
+
+    filteredTodos = todos.sort(function(a, b) {
+      const nameA = a.status.toString().toUpperCase(); // ignore upper and lowercase
+      const nameB = b.status.toString().toUpperCase(); // ignore upper and lowercase
+      if (nameA < nameB) {
+        return -1;
+      }
+      if (nameA > nameB) {
+        return 1;
+      }
+      // names must be equal
+      return 0;
+    });
+    return filteredTodos;
 
 
   }
+
+
 
 
 
