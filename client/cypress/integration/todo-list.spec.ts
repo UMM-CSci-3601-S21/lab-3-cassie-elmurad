@@ -84,6 +84,11 @@ describe('Todos list', () => {
 
   });
 
+  it('should sort todos based on a status value', () => {
+    page.changeSort('status');
+
+  });
+
 });
 
 
