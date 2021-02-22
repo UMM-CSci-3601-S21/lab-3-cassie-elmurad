@@ -21,6 +21,7 @@ export class TodoListComponent implements OnInit {
   public todoCategory: string;
   public todoStatus: string;
   public todoOwner: string;
+  public todoLimit: number;
   public sortBy: 'body' | 'status' | 'owner' | 'category' = 'owner';
   public viewType: 'list';
 
@@ -56,12 +57,13 @@ export class TodoListComponent implements OnInit {
 
   public updateFilter() {
     this.filteredTodos = this.todoService.filterTodos(
-      this.serverFilteredTodos, { status: this.todoStatus, category: this.todoCategory, body: this.todoBody });
+      this.serverFilteredTodos, { status: this.todoStatus, category: this.todoCategory, body: this.todoBody, limit: this.todoLimit });
   }
 
   public updateSort(sortField: string) {
     this.filteredTodos = this.todoService.sortTodos(
       this.serverFilteredTodos, sortField);
+      this.updateFilter();
 
   }
 

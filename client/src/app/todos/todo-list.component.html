@@ -24,8 +24,8 @@
 
           <mat-form-field class="input-field">
             <mat-label>Limit</mat-label>
-            <input matInput id="todo-limit-input" type="number" placeholder="Filter by Limit">
-            <!-- add to input tag above to filter from server -->
+            <input matInput id="todo-limit-input" placeholder="Filter by limit" [(ngModel)]="todoLimit"
+            (input)="getTodosFromServer()">
             <mat-hint>Filtered on server</mat-hint>
           </mat-form-field>
 
