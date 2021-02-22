@@ -89,6 +89,14 @@ describe('Todos list', () => {
 
   });
 
+  it('should type something for filtering into the body input and return correct elements', () => {
+    // get the todo body input
+    cy.get('#todo-limit-input').type('2')
+
+    page.getTodoListItems().should('have.length', 2);
+
+  });
+
 });
 
 
