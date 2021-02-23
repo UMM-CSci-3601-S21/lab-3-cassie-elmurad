@@ -13,7 +13,7 @@ import { ArrayDataSource } from '@angular/cdk/collections';
 })
 export class TodoListComponent implements OnInit {
 
-  public serverFilteredTodos: Todo[];
+  public serverFilteredTodos: Todo[] = [];
   public filteredTodos: Todo[];
 
   // Made public so that tests can reference them
@@ -31,11 +31,11 @@ export class TodoListComponent implements OnInit {
   }
 
   getTodosFromServer() {
-    this.todoService.getTodos({
+    const obs = this.todoService.getTodos({
       body: this.todoBody,
       owner: this.todoOwner,
-      order: this.sortBy,
-    }).subscribe(returnedTodos => {
+    });
+    obs.subscribe(returnedTodos => {
       this.serverFilteredTodos = returnedTodos;
       this.updateFilter();
 
@@ -49,6 +49,7 @@ export class TodoListComponent implements OnInit {
         { duration: 3000 });
 
     });
+    return obs.toPromise();
   }
 
   public setSortBy(sortBy: 'body' | 'status' | 'owner' | 'category' = 'owner') {

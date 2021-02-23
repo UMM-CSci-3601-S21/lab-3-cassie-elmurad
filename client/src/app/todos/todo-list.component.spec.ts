@@ -19,6 +19,9 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterTestingModule } from '@angular/router/testing';
+import { Observable } from 'rxjs';
+import { Todo } from './todo';
+
 
 const COMMON_IMPORTS: any[] = [
   FormsModule,
@@ -44,22 +47,44 @@ describe('TodoListComponent', () => {
   let todoList: TodoListComponent;
   let fixture: ComponentFixture<TodoListComponent>;
 
-  beforeEach(waitForAsync(() => {
-    TestBed.configureTestingModule({
+  beforeEach(waitForAsync(async () => {
+    await TestBed.configureTestingModule({
       imports: [ COMMON_IMPORTS ],
       declarations: [TodoListComponent],
       providers: [{ provide: TodoService, useClass: MockTodoService }],
     }).compileComponents();
   }));
 
-  beforeEach(() => {
+  beforeEach(waitForAsync(() => {
+    TestBed.compileComponents().then(() => {
     fixture = TestBed.createComponent(TodoListComponent);
     todoList = fixture.componentInstance;
     fixture.detectChanges();
-  });
+    todoList.getTodosFromServer();
+    });
+  }));
+
+
 
   it('should create', () => {
     expect(todoList).toBeTruthy();
+  });
+
+  it('contains all the Todos', () => {
+    todoList.getTodosFromServer().then( () => {expect(todoList.serverFilteredTodos.length).toBe(3);});
+  });
+
+  it('updates sort filter', () => {
+    todoList.getTodosFromServer().then( () =>{
+      todoList.updateSort('body');
+      const bodyA = todoList.serverFilteredTodos[0].body;
+      const bodyB = todoList.serverFilteredTodos[1].body;
+      expect(bodyA.localeCompare(bodyB)).toBeLessThanOrEqual(0);});
+  });
+
+  it('contains a owner named "Fry"', () => {
+    todoList.getTodosFromServer().then( () =>{
+      expect(todoList.serverFilteredTodos.some((todo: Todo) => todo.owner === 'Fry')).toBe(true);});
   });
 
 
