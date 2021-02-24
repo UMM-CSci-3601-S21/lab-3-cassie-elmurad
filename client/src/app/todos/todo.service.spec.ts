@@ -3,28 +3,33 @@ import { HttpClient } from '@angular/common/http';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { Todo } from './todo';
 import { TodoService } from './todo.service';
+import { ActivatedRoute, provideRoutes } from '@angular/router';
 
 describe('TodoService', () => {
   const testTodos: Todo[] = [
     {
+      _id:'38895985a22c04e761776d54',
       owner: 'Blanche',
       status: 'false',
       body: 'In sunt ex non tempor cillum commodo amet incididunt anim qui commodo quis. Cillum non labore ex sint esse.',
       category: 'software design'
     },
     {
+      _id: '58895985a22c04e761776d54',
       owner: 'Fry',
       status: 'false',
       body: 'Ipsum esse est ullamco magna tempor anim laborum non officia deserunt veniam commodo. Aute minim incididunt ex commodo.',
       category: 'video games'
     },
     {
+      _id: '58895985a22c04e761776d54',
       owner: 'Bob',
       status: 'true',
       body: 'Ullamco irure laborum magna dolor non. Anim occaecat adipisicing cillum eu magna in.',
       category: 'homework'
     },
     {
+      _id: '58895985a22c04e761776d54',
       owner: 'Blanche',
       status: 'true',
       body: 'Incididunt enim ea sit qui esse commodo veniam do ut sint.',
@@ -42,7 +47,7 @@ describe('TodoService', () => {
   beforeEach(() => {
     // Set up the mock handling of the HTTP requests
     TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule]
+      imports: [HttpClientTestingModule],
     });
     httpClient = TestBed.inject(HttpClient);
     httpTestingController = TestBed.inject(HttpTestingController);
@@ -192,6 +197,26 @@ describe('TodoService', () => {
 
       }
     });
+  });
+
+  describe('get todos by id', () =>{
+    it('gets a todo given its id', () => {
+      const targetTodo: Todo = testTodos[1];
+      const targetId: string = targetTodo._id;
+
+      todoService.getTodoById(targetId).subscribe(
+      todo => expect(todo).toBe(targetTodo)
+      );
+
+      const expectedUrl: string = todoService.todoUrl + '/' + targetId;
+      const req = httpTestingController.expectOne(expectedUrl);
+      expect(req.request.method).toEqual('GET');
+
+      req.flush(targetTodo);
+
+    });
+
+
   });
 
 
