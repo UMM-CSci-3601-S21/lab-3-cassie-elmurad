@@ -71,20 +71,18 @@ describe('TodoListComponent', () => {
   });
 
   it('contains all the Todos', () => {
-    todoList.getTodosFromServer().then( () => {expect(todoList.serverFilteredTodos.length).toBe(3);});
+    expect(todoList.serverFilteredTodos.length).toBe(3);
   });
 
-  it('updates sort filter', () => {
-    todoList.getTodosFromServer().then( () =>{
+  it('updates sort filter to sort by body', () => {
       todoList.updateSort('body');
       const bodyA = todoList.serverFilteredTodos[0].body;
       const bodyB = todoList.serverFilteredTodos[1].body;
-      expect(bodyA.localeCompare(bodyB)).toBeLessThanOrEqual(0);});
+      expect(bodyA.localeCompare(bodyB)).toBeLessThanOrEqual(0);
   });
 
   it('contains a owner named "Fry"', () => {
-    todoList.getTodosFromServer().then( () =>{
-      expect(todoList.serverFilteredTodos.some((todo: Todo) => todo.owner === 'Fry')).toBe(true);});
+      expect(todoList.serverFilteredTodos.some((todo: Todo) => todo.owner === 'Fry')).toBe(true);
   });
 
 

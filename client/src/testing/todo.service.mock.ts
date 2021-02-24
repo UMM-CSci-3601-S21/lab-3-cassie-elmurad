@@ -35,7 +35,6 @@ export class MockTodoService extends TodoService {
   }
 
   getTodos(filters: { body?: string; owner?: string; order?: string }): Observable<Todo[]> {
-    console.log('being called');
     return of(MockTodoService.testTodos);
   }
 

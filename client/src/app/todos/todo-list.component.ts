@@ -9,7 +9,7 @@ import { ArrayDataSource } from '@angular/cdk/collections';
   selector: 'app-todo-list',
   templateUrl: 'todo-list.component.html',
   styleUrls: ['./todo-list.component.scss'],
-  providers: [TodoService]
+
 })
 export class TodoListComponent implements OnInit {
 
@@ -31,14 +31,12 @@ export class TodoListComponent implements OnInit {
   }
 
   getTodosFromServer() {
-    const obs = this.todoService.getTodos({
+      this.todoService.getTodos({
       body: this.todoBody,
       owner: this.todoOwner,
-    });
-    obs.subscribe(returnedTodos => {
+    }).subscribe(returnedTodos => {
       this.serverFilteredTodos = returnedTodos;
       this.updateFilter();
-
     }, err => {
       // If there was an error getting the todos, display
       // a message.
@@ -49,11 +47,6 @@ export class TodoListComponent implements OnInit {
         { duration: 3000 });
 
     });
-    return obs.toPromise();
-  }
-
-  public setSortBy(sortBy: 'body' | 'status' | 'owner' | 'category' = 'owner') {
-    this.sortBy = sortBy;
   }
 
   public updateFilter() {
