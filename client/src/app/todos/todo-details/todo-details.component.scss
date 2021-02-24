@@ -1,0 +1,23 @@
+.todo-card-body {
+  font-style: italic;
+  color:#333;
+}
+
+.todo-status-false{
+  color:red;
+  font-weight: bolder;
+}
+
+.todo-status-true{
+  color:limegreen;
+  font-weight:bolder;
+}
+
+.todo-card {
+  margin: 10px;
+}
+
+.return-button:hover{
+  color:lightgray;
+}
+
