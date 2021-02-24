@@ -1,0 +1,59 @@
+mat-card {
+  width: 100%;
+  margin:10px;
+  position: relative;
+}
+
+.todo-card {
+  margin-bottom: 10px;
+}
+
+.search-card {
+  margin-bottom: 10px;
+
+}
+
+.mat-radio-button {
+  margin: 0 12px;
+}
+
+.todo-nav-list{
+  margin: 0 12px;
+  margin:10px;
+  position: relative;
+
+
+}
+
+.sort-by-radio{
+  justify-content: center;
+  position:relative;
+  margin:10px;
+  border:1px solid lightslategray;
+  border-radius: 5px;
+  background-color: white;
+
+}
+.mat-radio-group{
+  margin:5px;
+}
+
+label{
+  font-weight:italic;
+  font-size:larger;
+  margin:5px;
+}
+
+.todo-list-status-true{
+  color: limegreen;
+  font-style: large;
+}
+.todo-list-status-false{
+  font-weight: 900;
+  color:red;
+}
+.todo-list-body{
+  color:grey;
+  font-weight: 900;
+  font-style:italic;
+}
