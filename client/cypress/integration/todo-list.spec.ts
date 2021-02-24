@@ -43,7 +43,7 @@ describe('Todos list', () => {
     cy.get('#todo-status-input').type('false');
 
 
-    page.getTodoListItems().find('.todo-list-status')
+    page.getTodoListItems().find('.todo-list-status-false')
 
       .should('contain.text', 'false')
       // there shoul dnot be any todos with a true status
@@ -55,7 +55,7 @@ describe('Todos list', () => {
     cy.get('#todo-status-input').type('true');
 
 
-    page.getTodoListItems().find('.todo-list-status')
+    page.getTodoListItems().find('.todo-list-status-true')
 
       .should('contain.text', 'true')
       // there should not be todos with a false status
