@@ -161,7 +161,7 @@ describe('TodoService', () => {
         expect((filteredTodos[i][sortField]).localeCompare(filteredTodos[i+1][sortField])).toBeLessThanOrEqual(0);
 
       }
-    })
+    });
 
     it('sorts todos by category', () => {
       const sortField = 'category';
@@ -171,7 +171,7 @@ describe('TodoService', () => {
         expect((filteredTodos[i][sortField]).localeCompare(filteredTodos[i+1][sortField])).toBeLessThanOrEqual(0);
 
       }
-    })
+    });
 
     it('sorts todos by status', () => {
       const sortField = 'status';
@@ -181,7 +181,7 @@ describe('TodoService', () => {
         expect((filteredTodos[i][sortField]).localeCompare(filteredTodos[i+1][sortField])).toBeLessThanOrEqual(0);
 
       }
-    })
+    });
 
     it('sorts todos by owner', () => {
       const sortField = 'owner';
@@ -191,7 +191,7 @@ describe('TodoService', () => {
         expect((filteredTodos[i][sortField]).localeCompare(filteredTodos[i+1][sortField])).toBeLessThanOrEqual(0);
 
       }
-    })
+    });
   });
 
 
