@@ -147,16 +147,7 @@ describe('TodoService', () => {
         expect(todo.status.indexOf(todoStatus)).toBeGreaterThanOrEqual(0);
       });
     });
-
-
-
-
-
-
-
-
   });
-
 
 
 

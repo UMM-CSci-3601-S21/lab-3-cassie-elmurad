@@ -3,12 +3,13 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { Todo } from './todo';
 import { TodoService } from './todo.service';
 import { HttpClientModule } from '@angular/common/http';
+import { ArrayDataSource } from '@angular/cdk/collections';
 
 @Component({
   selector: 'app-todo-list',
   templateUrl: 'todo-list.component.html',
   styleUrls: ['./todo-list.component.scss'],
-  providers: [ TodoService]
+  providers: [TodoService]
 })
 export class TodoListComponent implements OnInit {
 
@@ -20,20 +21,23 @@ export class TodoListComponent implements OnInit {
   public todoCategory: string;
   public todoStatus: string;
   public todoOwner: string;
+  public sortBy: 'body' | 'status' | 'owner' | 'category' = 'owner';
   public viewType: 'list';
 
 
-  constructor(private todoService: TodoService, private snackBar: MatSnackBar ) {
+  constructor(private todoService: TodoService, private snackBar: MatSnackBar) {
 
   }
 
   getTodosFromServer() {
     this.todoService.getTodos({
       body: this.todoBody,
-      owner: this.todoOwner
+      owner: this.todoOwner,
+      order: this.sortBy,
     }).subscribe(returnedTodos => {
       this.serverFilteredTodos = returnedTodos;
       this.updateFilter();
+
     }, err => {
       // If there was an error getting the todos, display
       // a message.
@@ -44,11 +48,21 @@ export class TodoListComponent implements OnInit {
         { duration: 3000 });
 
     });
-}
+  }
+
+  public setSortBy(sortBy: 'body' | 'status' | 'owner' | 'category' = 'owner') {
+    this.sortBy = sortBy;
+  }
 
   public updateFilter() {
     this.filteredTodos = this.todoService.filterTodos(
-      this.serverFilteredTodos, { status: this.todoStatus, category: this.todoCategory });
+      this.serverFilteredTodos, { status: this.todoStatus, category: this.todoCategory, body: this.todoBody });
+  }
+
+  public updateSort(sortField: string) {
+    this.filteredTodos = this.todoService.sortTodos(
+      this.serverFilteredTodos, sortField);
+
   }
 
   ngOnInit(): void {

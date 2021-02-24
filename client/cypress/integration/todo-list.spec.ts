@@ -72,6 +72,24 @@ describe('Todos list', () => {
 
   });
 
+  it('should sort todos based on a body', () => {
+    page.changeSort('body');
+    page.getTodoListItems().find('.todo-list-body')
+
+
+  });
+
+  it('should sort todos based on a owner value', () => {
+    page.changeSort('owner');
+
+  });
+
+  it('should sort todos based on a status value', () => {
+    page.changeSort('status');
+
+  });
 
 });
+
+
 

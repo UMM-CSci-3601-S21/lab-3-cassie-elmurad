@@ -16,7 +16,7 @@ export class TodoService {
 
   }
 
-  getTodos(filters?: { body?: string; owner?: string  }): Observable<Todo[]> {
+  getTodos(filters?: { body?: string; owner?: string; order?: string }): Observable<Todo[]> {
     let httpParams: HttpParams = new HttpParams();
     if (filters) {
       if (filters.body) {
@@ -24,6 +24,7 @@ export class TodoService {
       }
       if (filters.owner) {
         httpParams = httpParams.set('owner', filters.owner);
+
       }
 
     }
@@ -32,7 +33,7 @@ export class TodoService {
     });
   }
 
-  filterTodos(todos: Todo[], filters: { status?: string; category?: string }): Todo[] {
+  filterTodos(todos: Todo[], filters: { status?: string; category?: string; body?: string }): Todo[] {
 
     let filteredTodos = todos;
 
@@ -41,16 +42,27 @@ export class TodoService {
       filters.category = filters.category.toLowerCase();
 
       filteredTodos = filteredTodos.filter(todo => todo.category.toLowerCase().indexOf(filters.category) !== -1);
+
     }
     if (filters.status){
       filters.status = filters.status.toLowerCase();
       filteredTodos = filteredTodos.filter(todo => todo.status.toString().toLowerCase().indexOf(filters.status) !== -1);
     }
-
-
-
+    if(filters.body){
+      filteredTodos = filteredTodos.filter(todo => todo.body.toLowerCase().indexOf(filters.body) !==-1);
+    }
     return filteredTodos;
   }
 
+  sortTodos(todos: Todo[], sortField: string){
+    let filteredTodos = todos;
+
+    filteredTodos = filteredTodos.sort((a, b) => {
+      const nameA = a[sortField].toString().toUpperCase();
+      const nameB = b[sortField].toString().toUpperCase();
+      return(nameA.localeCompare(nameB));
+    });
+    return filteredTodos;
+  }
 
 }
