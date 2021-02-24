@@ -1,4 +1,9 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+
+import { TodoListComponent } from './todo-list.component';
+import { TodoService } from './todo.service';
+import { MockTodoService } from '../../testing/todo.service.mock';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
@@ -15,10 +20,8 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterTestingModule } from '@angular/router/testing';
 import { Observable } from 'rxjs';
-import { MockTodoService } from '../../testing/todo.service.mock';
-import { TodoListComponent } from './todo-list.component';
-import { TodoService } from './todo.service';
 import { Todo } from './todo';
+
 
 const COMMON_IMPORTS: any[] = [
   FormsModule,
@@ -36,37 +39,51 @@ const COMMON_IMPORTS: any[] = [
   MatSnackBarModule,
   BrowserAnimationsModule,
   RouterTestingModule,
+  HttpClientTestingModule
 ];
 
-describe('TodoListComponent', () => {
 
+describe('TodoListComponent', () => {
   let todoList: TodoListComponent;
   let fixture: ComponentFixture<TodoListComponent>;
 
-  beforeEach(() => {
-    TestBed.configureTestingModule({
-      imports: [COMMON_IMPORTS],
+  beforeEach(waitForAsync(async () => {
+    await TestBed.configureTestingModule({
+      imports: [ COMMON_IMPORTS ],
       declarations: [TodoListComponent],
-
-      providers: [{ provide: TodoService, useValue: new MockTodoService() }]
-    });
-  });
+      providers: [{ provide: TodoService, useClass: MockTodoService }],
+    }).compileComponents();
+  }));
 
   beforeEach(waitForAsync(() => {
     TestBed.compileComponents().then(() => {
-
-      fixture = TestBed.createComponent(TodoListComponent);
-      todoList = fixture.componentInstance;
-      fixture.detectChanges();
+    fixture = TestBed.createComponent(TodoListComponent);
+    todoList = fixture.componentInstance;
+    fixture.detectChanges();
+    todoList.getTodosFromServer();
     });
   }));
 
 
 
+  it('should create', () => {
+    expect(todoList).toBeTruthy();
+  });
 
+  it('contains all the Todos', () => {
+    expect(todoList.serverFilteredTodos.length).toBe(3);
+  });
 
+  it('updates sort filter to sort by body', () => {
+      todoList.updateSort('body');
+      const bodyA = todoList.serverFilteredTodos[0].body;
+      const bodyB = todoList.serverFilteredTodos[1].body;
+      expect(bodyA.localeCompare(bodyB)).toBeLessThanOrEqual(0);
+  });
+
+  it('contains a owner named "Fry"', () => {
+      expect(todoList.serverFilteredTodos.some((todo: Todo) => todo.owner === 'Fry')).toBe(true);
+  });
 
 
 });
-
-

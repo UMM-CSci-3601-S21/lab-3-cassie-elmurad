@@ -20,6 +20,10 @@ export class TodoListPage{
     return cy.get(`[data-test=sortByRadio] .mat-radio-button[value="${sortBy}"]`).click();
   }
 
+  clickViewDetail(card: Cypress.Chainable<JQuery<HTMLElement>>) {
+    return card.find<HTMLButtonElement>('[data-test=viewDetailButton]').click();
+  }
+
 
 
 

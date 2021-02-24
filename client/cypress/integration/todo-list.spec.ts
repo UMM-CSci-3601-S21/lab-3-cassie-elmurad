@@ -43,7 +43,7 @@ describe('Todos list', () => {
     cy.get('#todo-status-input').type('false');
 
 
-    page.getTodoListItems().find('.todo-list-status')
+    page.getTodoListItems().find('.todo-list-status-false')
 
       .should('contain.text', 'false')
       // there shoul dnot be any todos with a true status
@@ -55,7 +55,7 @@ describe('Todos list', () => {
     cy.get('#todo-status-input').type('true');
 
 
-    page.getTodoListItems().find('.todo-list-status')
+    page.getTodoListItems().find('.todo-list-status-true')
 
       .should('contain.text', 'true')
       // there should not be todos with a false status
@@ -88,6 +88,41 @@ describe('Todos list', () => {
     page.changeSort('status');
 
   });
+
+  it('should type something for filtering into the body input and return correct elements', () => {
+    // get the todo body input
+    cy.get('#todo-limit-input').type('2')
+
+    page.getTodoListItems().should('have.length', 2);
+
+  });
+
+  it('should route to the todo details view', () => {
+    // get the todo body input
+    cy.get('#todo-limit-input').type('2')
+
+    page.getTodoListItems().should('have.length', 2);
+
+  });
+
+  it('Should click view profile on a user and go to the right URL', () => {
+    page.getTodoListItems().first().then((card) => {
+      const firstUserName = card.find('.todo-list-owner').text();
+      const firstUserCompany = card.find('.todo-list-category').text();
+
+      // When the view profile button on the first user card is clicked, the URL should have a valid mongo ID
+      page.clickViewDetail(page.getTodoListItems().first());
+
+      // The URL should contain '/users/' (note the ending slash) and '/users/' should be followed by a mongo ID
+      cy.url()
+        .should('contain', '/todos/')
+        .should('match', /.*\/todos\/[0-9a-fA-F]{24}$/);
+
+      // On this profile page we were sent to, the name and company should be correct
+      cy.get('.todo-card-owner').first().should('have.text', firstUserName);
+      cy.get('.todo-card-category').first().should('have.text', firstUserCompany);
+    });
+   });
 
 });
 

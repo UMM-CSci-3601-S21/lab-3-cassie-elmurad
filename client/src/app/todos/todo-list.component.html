@@ -6,13 +6,11 @@
       <mat-card-content fxLayout="column">
 
         <div fxLayout="row wrap" fxLayoutGap="10px">
-
           <mat-form-field class="input-field">
             <mat-label>Owner</mat-label>
             <input matInput id="todo-owner-input" placeholder="Filter by Owner" [(ngModel)]="todoOwner"
               (input)="getTodosFromServer()">
             <mat-hint>Filtered on server</mat-hint>
-
           </mat-form-field>
 
           <mat-form-field class="input-field">
@@ -24,8 +22,8 @@
 
           <mat-form-field class="input-field">
             <mat-label>Limit</mat-label>
-            <input matInput id="todo-limit-input" type="number" placeholder="Filter by Limit">
-            <!-- add to input tag above to filter from server -->
+            <input matInput id="todo-limit-input" placeholder="Filter by limit" [(ngModel)]="todoLimit"
+            (input)="getTodosFromServer()">
             <mat-hint>Filtered on server</mat-hint>
           </mat-form-field>
 
@@ -42,9 +40,13 @@
               (input)="getTodosFromServer()">
             <mat-hint>Filtered on client</mat-hint>
           </mat-form-field>
+        </div>
+      </mat-card-content>
+      </mat-card>
 
-          <div fxLayout="row wrap" fxLayoutGap="10px">
-            <label>Sort By</label>
+        <mat-card>
+          <div fxLayout="row wrap" fxLayoutGap="10px" class="sort-by-radio">
+            <label id="sort-by">Sort By:</label>
             <mat-radio-group aria-label="Sort by" [(ngModel)]="sortBy" data-test="sortByRadio">
               <mat-radio-button value="body" (input)="updateSort($event.target.value)">Body</mat-radio-button>
               <mat-radio-button value="owner" (input)="updateSort($event.target.value)">Owner</mat-radio-button>
@@ -52,10 +54,12 @@
               <mat-radio-button value="category" (input)="updateSort($event.target.value)">Category</mat-radio-button>
             </mat-radio-group>
           </div>
+        </mat-card>
 
-        </div>
+
+
         <div fxLayout="row">
-          <div fxFlex fxFlex.gt-sm="80" fxFlexOffset.gt-sm="10" *ngIf="serverFilteredTodos">
+          <div fxFlex fxFlex.gt-sm="100" fxFlexOffset.gt-sm="0" *ngIf="serverFilteredTodos">
             <!-- Switch between card and list view based on the viewType variable, set above in the mar-radio-group -->
             <div>
               <!-- List view -->
@@ -63,18 +67,20 @@
                 <mat-card-content>
                   <mat-nav-list class="todo-nav-list">
                     <h3 mat-subheader>Todos</h3>
-                    <a mat-list-item *ngFor="let todo of this.filteredTodos" [routerLink]="['/todos', todo.owner]"
-                      class="todo-list-item">
-                      <h3 matLine class="todo-list-owner"> {{todo.owner}} </h3>
-                      <p matLine class="todo-list-body"> {{todo.body}} </p>
-                      <p matLine class="todo-list-category"> {{todo.category}} </p>
-                      <p matLine class="todo-list-status"> {{todo.status}} </p>
+                    <a mat-list-item *ngFor="let todo of this.filteredTodos" [routerLink]="['/todos', todo._id]"class="todo-list-item">
+                      <h3 matLine class="todo-list-owner">{{todo.owner}}</h3>
+                      <p matLine class="todo-list-body">{{todo.body}}</p>
+                      <p matLine class="todo-list-category">{{todo.category}}</p>
+                      <p matLine class="todo-list-status-true" *ngIf="todo.status"> {{todo.status}} </p>
+                      <p matLine class="todo-list-status-false" *ngIf="!todo.status"> {{todo.status}} </p>
+                      <button mat-button data-test="viewDetailButton" [routerLink]="['/todos', this.todo._id]">View Details</button>
                     </a>
                   </mat-nav-list>
                 </mat-card-content>
               </mat-card>
 
             </div>
+
 
 
 

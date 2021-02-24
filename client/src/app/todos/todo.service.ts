@@ -33,7 +33,7 @@ export class TodoService {
     });
   }
 
-  filterTodos(todos: Todo[], filters: { status?: string; category?: string; body?: string }): Todo[] {
+  filterTodos(todos: Todo[], filters: { status?: string; category?: string; body?: string; limit?: number}): Todo[] {
 
     let filteredTodos = todos;
 
@@ -42,7 +42,6 @@ export class TodoService {
       filters.category = filters.category.toLowerCase();
 
       filteredTodos = filteredTodos.filter(todo => todo.category.toLowerCase().indexOf(filters.category) !== -1);
-
     }
     if (filters.status){
       filters.status = filters.status.toLowerCase();
@@ -50,6 +49,9 @@ export class TodoService {
     }
     if(filters.body){
       filteredTodos = filteredTodos.filter(todo => todo.body.toLowerCase().indexOf(filters.body) !==-1);
+    }
+    if(filters.limit){
+      filteredTodos = filteredTodos.slice(0, filters.limit);
     }
     return filteredTodos;
   }
@@ -64,5 +66,11 @@ export class TodoService {
     });
     return filteredTodos;
   }
+
+  getTodoById(id: string): Observable<Todo> {
+    return this.httpClient.get<Todo>(this.todoUrl + '/' + id);
+  }
+
+
 
 }
