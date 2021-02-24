@@ -41,7 +41,7 @@ describe('TodoDetailsComponent', () => {
 
   it('should navigate to a specific todo profile', () => {
     const expectedTodo: Todo = MockTodoService.testTodos[0];
- 
+
     activatedRoute.setParamMap({ id: expectedTodo._id });
 
     expect(component.id).toEqual(expectedTodo._id);
